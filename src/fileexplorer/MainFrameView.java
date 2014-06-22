@@ -14,18 +14,20 @@ import java.awt.event.WindowListener;
  */
 public class MainFrameView extends javax.swing.JFrame implements WindowListener {
 
+    DataClassMain dmain;
     /**
      * Creates new form MainFrameView
      */
     public MainFrameView() {
         initComponents();
+        dmain = new DataClassMain();
     }
     public MainFrameView(String name)
     {
         initComponents();
         this.setTitle(name);
         this.addWindowListener(this);
-        
+        dmain = new DataClassMain();
     }
     public void windowClosing(WindowEvent e) {
         textAreaMain.append("closing\n");
@@ -129,7 +131,16 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        textAreaMain.append("あれ？\n");
+        String []stringList = { "いち","２","3"};
+        dmain.setSub1Data1("いいちご");
+        String tmp = dmain.getSub1Data1();
+        textAreaMain.append(tmp);
+        dmain.updateSub1Data1();
+        for(String s:stringList) {
+            textAreaMain.append(s+"\n");
+        }
+        textAreaMain.append(tmp);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
