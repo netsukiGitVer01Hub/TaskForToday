@@ -5,7 +5,7 @@
  */
 
 package fileexplorer;
-
+import java.awt.event.*;
 /**
  *
  * @author m
@@ -19,6 +19,10 @@ public class SubFrameTest extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void setActionListener(ActionListener i) {
+        buttonKo.addActionListener(i);
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,17 +32,36 @@ public class SubFrameTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labelKo = new javax.swing.JLabel();
+        buttonKo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        labelKo.setText("jLabel1");
+
+        buttonKo.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(labelKo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(buttonKo)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(labelKo)
+                .addGap(35, 35, 35)
+                .addComponent(buttonKo)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,5 +103,7 @@ public class SubFrameTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonKo;
+    private javax.swing.JLabel labelKo;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,19 +7,27 @@
 package fileexplorer;
 import java.awt.event.*;
 import java.awt.event.WindowListener;
-
+import fileexplorer.KoPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import fileexplorer.SubFrameTest;
+import java.awt.event.*;
 /**
  *
  * @author m
  */
-public class MainFrameView extends javax.swing.JFrame implements WindowListener {
-
+public class MainFrameView extends javax.swing.JFrame implements WindowListener,ActionListener {
+    private KoPanel koPanel;
+    private SubFrameTest  subFrame = new SubFrameTest();
     DataClassMain dmain;
     /**
      * Creates new form MainFrameView
      */
-    public MainFrameView() {
+    private MainFrameView() {
         initComponents();
+        
+        
+        
         dmain = new DataClassMain();
     }
     public MainFrameView(String name)
@@ -28,6 +36,14 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
         this.setTitle(name);
         this.addWindowListener(this);
         dmain = new DataClassMain();
+        koPanel = new KoPanel();
+        koPanel.setBackground(Color.ORANGE);
+        getContentPane().add(koPanel, BorderLayout.PAGE_START);
+        subFrame.setActionListener(this);
+        subFrame.setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e) {
+        jTextField1.setText("このいべんとがー\n");
     }
     public void windowClosing(WindowEvent e) {
         textAreaMain.append("closing\n");
@@ -69,6 +85,8 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaMain = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        buttonParseTest = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -76,6 +94,11 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                formComponentAdded(evt);
+            }
+        });
 
         textAreaMain.setColumns(20);
         textAreaMain.setRows(5);
@@ -88,6 +111,15 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
                 jButton2ActionPerformed(evt);
             }
         });
+
+        buttonParseTest.setText("parseTest");
+        buttonParseTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonParseTestActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("jTextField1");
 
         jMenu1.setLabel("ふぁいるっぽい");
 
@@ -108,18 +140,32 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(371, 371, 371)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(buttonParseTest)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(buttonParseTest)
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -142,6 +188,22 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
         textAreaMain.append(tmp);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void buttonParseTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonParseTestActionPerformed
+        // parse test
+        String s = "+32";
+        
+        try {
+            int i = Integer.valueOf(s);
+        } catch (Exception e){
+            buttonParseTest.setText("parse error");
+        }
+       
+    }//GEN-LAST:event_buttonParseTestActionPerformed
+
+    private void formComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_formComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formComponentAdded
 
     /**
      * @param args the command line arguments
@@ -179,12 +241,14 @@ public class MainFrameView extends javax.swing.JFrame implements WindowListener 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonParseTest;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextArea textAreaMain;
     // End of variables declaration//GEN-END:variables
 }
